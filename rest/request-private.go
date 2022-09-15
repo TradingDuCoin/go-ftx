@@ -132,7 +132,7 @@ func (p *Client) OrderTriggerHistories(req *orders.RequestForOrderTriggerHistori
 }
 
 /*
-	# send order
+# send order
 */
 func (p *Client) PlaceOrder(req *orders.RequestForPlaceOrder) (*orders.ResponseForPlaceOrder, error) {
 	results := new(orders.ResponseForPlaceOrder)
@@ -211,8 +211,15 @@ func (p *Client) Funding(req *funding.Request) (*funding.Response, error) {
 }
 
 /*
-	# Spot Margin
+# Spot Margin
 */
+func (p *Client) GetSpotMarginInfo(req *spotmargin.RequestForSpotMarginInfo) (*spotmargin.ResponseForSpotMarginInfo, error) {
+	results := new(spotmargin.ResponseForSpotMarginInfo)
+	if err := p.request(req, results); err != nil {
+		return nil, err
+	}
+	return results, nil
+}
 
 func (p *Client) GetLendingInfo(req *spotmargin.RequestForLendingInfo) (*spotmargin.ResponseForLendingInfo, error) {
 	results := new(spotmargin.ResponseForLendingInfo)
@@ -263,7 +270,7 @@ func (p *Client) GetBorrowHistory(req *spotmargin.RequestForBorrowHistory) (*spo
 }
 
 /*
-	# SubAccount
+# SubAccount
 */
 func (p *Client) SubAccounts(req *subaccount.RequestForSubAccounts) (*subaccount.ResponseForSubAccounts, error) {
 	results := new(subaccount.ResponseForSubAccounts)
@@ -314,7 +321,7 @@ func (p *Client) TransferSubAccount(req *subaccount.RequestForTransferSubAccount
 }
 
 /*
-	# Convert
+# Convert
 */
 func (p *Client) RequestConvertQuote(req *convert.RequestForRequestQuote) (*convert.ResponseForRequestQuote, error) {
 	results := new(convert.ResponseForRequestQuote)
