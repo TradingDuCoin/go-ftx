@@ -17,7 +17,7 @@ type SpotMarginInfo struct {
 }
 
 func (req *RequestForSpotMarginInfo) Path() string {
-	return "/spot_margin/market_info"
+	return "/spot_margin/market_info?market=BTC"
 }
 
 func (req *RequestForSpotMarginInfo) Method() string {
