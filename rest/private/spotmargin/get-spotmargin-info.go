@@ -1,10 +1,13 @@
 package spotmargin
 
 import (
+	"fmt"
 	"net/http"
 )
 
-type RequestForSpotMarginInfo struct{}
+type RequestForSpotMarginInfo struct {
+	Market string
+}
 
 type ResponseForSpotMarginInfo []SpotMarginInfo
 
@@ -17,7 +20,7 @@ type SpotMarginInfo struct {
 }
 
 func (req *RequestForSpotMarginInfo) Path() string {
-	return "/spot_margin/market_info?market=BTC"
+	return "/spot_margin/market_info"
 }
 
 func (req *RequestForSpotMarginInfo) Method() string {
@@ -25,7 +28,10 @@ func (req *RequestForSpotMarginInfo) Method() string {
 }
 
 func (req *RequestForSpotMarginInfo) Query() string {
-	return ""
+	if req.Market != "" {
+		return fmt.Sprintf("market=%s", req.Market)
+	}
+	return "market=BTC/USD"
 }
 
 func (req *RequestForSpotMarginInfo) Payload() []byte {

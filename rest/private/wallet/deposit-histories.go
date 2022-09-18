@@ -3,6 +3,8 @@ package wallet
 import (
 	"net/http"
 	"time"
+
+	"github.com/google/go-querystring/query"
 )
 
 type RequestForDepositHistories struct {
@@ -37,7 +39,8 @@ func (req *RequestForDepositHistories) Method() string {
 }
 
 func (req *RequestForDepositHistories) Query() string {
-	return ""
+	values, _ := query.Values(queryInput{StartTime: req.StartTime.Unix(), EndTime: req.EndTime.Unix()})
+	return values.Encode()
 }
 
 func (req *RequestForDepositHistories) Payload() []byte {
