@@ -19,12 +19,14 @@ type Client struct {
 	HTTPTimeout time.Duration
 }
 
-func New(auth *auth.Config) *Client {
-	hc := new(fasthttp.Client)
+func New(auth *auth.Config, fhc *fasthttp.Client, timeout time.Duration) *Client {
+	if fhc == nil {
+		fhc = new(fasthttp.Client)
+	}
 
 	return &Client{
 		Auth:        auth,
-		HTTPC:       hc,
-		HTTPTimeout: 5 * time.Second,
+		HTTPC:       fhc,
+		HTTPTimeout: timeout,
 	}
 }
